@@ -1,53 +1,49 @@
 <template>
   <div class="index">
-    <a @click.prevent="logout">登出</a>
+      <div class="logo-wrap text-center">
+         <router-link class="py-2 d-none d-md-inline-block logo" to="/">
+          萬事屋
+        </router-link>
+      </div>
+    <Header></Header>
+    <div class="main">
+      <router-view></router-view>
+    </div>
+    <Footer></Footer>
+    <Cart></Cart>
+    <Alert></Alert>
+    <showProduct></showProduct>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'Index',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  methods: {
-    logout(){
-      const apiUrl=`${process.env.APIPATH}/logout`;
-      const vm=this;
-      this.$http.post(apiUrl)
-      .then(res => {
-        console.log(res.data.success);
-        if(res.data.success){
-          vm.$router.push('/login');
-        }
-      })
-      .catch(err => {
-        console.error(err); 
-      });
-    }
-  },
-  created() {
-    console.log('這裡是首頁');
-  },
-}
+  import Header from './Header';
+  import Footer from './Footer';
+  import Cart from './Cart';
+  import Alert from './AlertMessage';
+  import showProduct from './showProduct';
+
+  export default {
+    name: 'Index',
+    data() {
+      return {
+
+      }
+    },
+    methods: {},
+    created() {},
+    components: {
+      Header,
+      Footer,
+      Cart,
+      Alert,
+      showProduct
+    },
+  }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang="scss">
+   @import "../assets/scss/index";
 </style>

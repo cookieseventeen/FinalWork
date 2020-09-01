@@ -1,6 +1,7 @@
 <template>
   <div class="dashboard">
     <Navbar></Navbar>
+    <Alert></Alert>
     <div class="container-fluid">
       <div class="row">
         <Sidebar></Sidebar>
@@ -15,6 +16,7 @@
 <script>
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import Alert from './AlertMessage';
 
   export default {
     name: 'Dashboard',
@@ -25,7 +27,8 @@ import Sidebar from './Sidebar';
     },
     components:{
       Navbar,
-      Sidebar
+      Sidebar,
+      Alert
     },
     methods: {
 
@@ -36,9 +39,3 @@ import Sidebar from './Sidebar';
   }
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-
-</style>
