@@ -1,21 +1,14 @@
-# finalwork
+# FinalWork
 
-> A Vue.js project
+> 利用Vue.js 操作ＣＲＵＤ，透過這個範例順便展示曾經做個案例。
 
-## Build Setup
+> 這個專案原本其實是我在六角學院的最終作業，但我希望賦予他更多的意義，所以我結合作品展示並且銷售的想法在裡面，在製作的過程裡我特別額外增加一些欄位，例如首頁的精選商品，只要你後台有勾選就會出現在首頁，還額外增加內頁的詳細介紹的欄位等等類似的變化。
 
-``` bash
-# install dependencies
-npm install
+> 我自己的特別喜歡透過影片展示功能的部分，一開始我其實沒有設想很多，但我感覺只是透過文字還有圖片解說無法精準的媒合我跟user之間的想像，而且最重要的是無法讓User專注在我想給他看的範圍裡，基於這些原因我決定用影片展示功能，在第一時間我想利用Youtube這個免費的影音串流平台來作為存放特效影片的地方，在製作螢幕錄影的過程中，意外發現mac 內建的Quicktime 有螢幕錄影的功能，還有自動上傳Youtube的功能，完美節省了上傳資料的步驟，影片更新的問題就這樣解決。
 
-# serve with hot reload at localhost:8080
-npm run dev
+> 另外值得我一提的是後台新增資料的設計，我在後台更新資料的時候發現產品標題跟詳細說明其實跟Youtube 影片內容其實可以一樣，如過需要再填一次那很不符合人性，所以我結合套件"get-youtube-id"及"YouTube Data API"，後台更新資料你只要先填上影片網址點擊按鈕就能透過ＡＰＩ填上 “影片的名稱”、“影片介紹”、“影片縮圖”，大幅節省了更新資料的負擔。
 
-# build for production with minification
-npm run build
+> 上面說的東西其實只是一些很簡單的動作，其實三言兩語可以解決，我特別如此介紹，是希望看到這些內容的人，能夠了解我所喜歡做的事情。
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
