@@ -53,6 +53,13 @@
           </ul>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="copyright text-center">
+            本網站僅供測試展示使用並非正式網站。
+          </p>
+        </div>
+      </div>
     </footer>
   </div>
 </template>

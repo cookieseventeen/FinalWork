@@ -12,7 +12,7 @@
     <Footer></Footer>
     <Cart></Cart>
     <Alert></Alert>
-    <showProduct></showProduct>
+    <showProduct ></showProduct>
   </div>
 </template>
 
@@ -27,7 +27,7 @@
     name: 'Index',
     data() {
       return {
-
+          openShowProduct:false
       }
     },
     methods: {},

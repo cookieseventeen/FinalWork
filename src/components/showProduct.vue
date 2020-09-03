@@ -209,12 +209,16 @@
         vm.productDetail = productData;
         vm.status.show = true;
         vm.videoId = getYouTubeID(productData.youtube);
+        document.querySelector('body').classList.add("open");
         vm.playVideo();
+
       },
       hideProduct() {
         const vm = this;
         vm.status.show = false;
         vm.status.playing = false;
+
+        document.querySelector('body').classList.remove("open");
         vm.pausedVideo();
       },
       playVideo() {

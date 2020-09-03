@@ -193,7 +193,7 @@
       getCart() {
         const apiUrl = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
         const vm = this;
-
+        
         this.$http.get(apiUrl)
           .then(res => {
             this.cartData = res.data.data;

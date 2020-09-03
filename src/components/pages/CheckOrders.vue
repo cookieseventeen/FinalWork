@@ -42,49 +42,47 @@
         </div>
       </div>
       <hr>
-      <div class="my-5 row justify-content-center">
-      <form class="col-md-12" @submit.prevent="createdOrder">
-        <div class="form-group">
-          <label for="useremail">Email</label>
-          <input type="email" class="form-control" name="email" id="useremail" v-model="form.user.email"
-            v-validate="'required|email'" :class="{'is-invalid': errors.has('email')}" placeholder="請輸入 Email" >
-          <span class="text-danger" v-if="errors.has('email')">
-            {{ errors.first('email') }}
-          </span>
-        </div>
+      <div class="container">
+        <div class="my-5 row justify-content-center">
+          <form class="col-md-12" @submit.prevent="createdOrder">
+            <div class="form-group">
+              <label for="useremail">Email</label>
+              <input type="email" class="form-control" name="email" id="useremail" v-model="form.user.email"
+                v-validate="'required|email'" :class="{'is-invalid': errors.has('email')}" placeholder="請輸入 Email">
+              <span class="text-danger" v-if="errors.has('email')">
+                {{ errors.first('email') }}
+              </span>
+            </div>
 
-        <div class="form-group">
-          <label for="username">收件人姓名</label>
-          <input type="text" class="form-control" name="name" id="username" v-model="form.user.name"
-            v-validate="'required'" :class="{'is-invalid': errors.has('name')}" placeholder="輸入姓名" >
-          <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
+            <div class="form-group">
+              <label for="username">收件人姓名</label>
+              <input type="text" class="form-control" name="name" id="username" v-model="form.user.name"
+                v-validate="'required'" :class="{'is-invalid': errors.has('name')}" placeholder="輸入姓名">
+              <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
+            </div>
+            <div class="form-group">
+              <label for="usertel">收件人電話</label>
+              <input type="tel" class="form-control" name="phonenumber" id="usertel" v-model="form.user.tel"
+                v-validate="'required'" :class="{'is-invalid': errors.has('phonenumber')}" placeholder="請輸入電話">
+              <span class="text-danger" v-if="errors.has('phonenumber')">請輸入電話</span>
+            </div>
+            <div class="form-group">
+              <label for="useraddress">收件人地址</label>
+              <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
+                v-validate="'required'" :class="{'is-invalid': errors.has('address')}" placeholder="請輸入地址">
+              <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
+            </div>
+            <div class="form-group">
+              <label for="comment">留言</label>
+              <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-danger">送出訂單</button>
+            </div>
+          </form>
         </div>
-
-        <div class="form-group">
-          <label for="usertel">收件人電話</label>
-          <input type="tel" class="form-control" name="phonenumber" id="usertel" v-model="form.user.tel" v-validate="'required'" :class="{'is-invalid': errors.has('phonenumber')}" placeholder="請輸入電話">
-          <span class="text-danger" v-if="errors.has('phonenumber')">請輸入電話</span>
-        </div>
-
-        <div class="form-group">
-          <label for="useraddress">收件人地址</label>
-          <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address"
-             v-validate="'required'" :class="{'is-invalid': errors.has('address')}" placeholder="請輸入地址">
-          <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>
-        </div>
-
-        <div class="form-group">
-          <label for="comment">留言</label>
-          <textarea name="" id="comment" class="form-control" cols="30" rows="10" v-model="form.message"></textarea>
-        </div>
-        <div class="text-right">
-          <button class="btn btn-danger">送出訂單</button>
-        </div>
-      </form>
+      </div>
     </div>
-    </div>
-    
-
   </div>
 </template>
 
@@ -95,10 +93,7 @@
     name: 'CheckOrder',
     data() {
       return {
-        productsDate: [],
         cartData: {},
-        modalData: {},
-        paginationData: {},
         coupon_code: '',
         isLoading: false,
         form: {
@@ -111,75 +106,17 @@
           message: ''
         },
         status: {
-          loadItem: '',
           cartItem: '',
         }
       }
     },
     created() {
-      this.getProducts();
+      // this.getProducts();
       this.getCart();
       //this.$bus.$emit('message:push', '這裡是一段訊息', 'success');
       this.$bus.$emit('close-cart:push');
     },
     methods: {
-      getProducts(page = 1) {
-        const apiUrl = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
-        const vm = this;
-
-        vm.isLoading = true;
-
-        this.$http.get(apiUrl)
-          .then(res => {
-            vm.productsDate = res.data.products;
-            vm.paginationData = res.data.pagination;
-            vm.isLoading = false;
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      },
-      getProduct(id) {
-        const apiUrl = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`;
-        const vm = this;
-
-        vm.isLoading = true;
-        vm.status.loadItem = id;
-        vm.modalData = {};
-
-        this.$http.get(apiUrl)
-          .then(res => {
-            vm.modalData = res.data.product;
-            
-            vm.isLoading = false;
-
-            $('#productModal').modal('show');
-            vm.status.loadItem = '';
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      },
-      addToCart(id, qty = 1) {
-        const apiUrl = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
-        const vm = this;
-        const cartData = {
-          product_id: id,
-          qty
-        }
-        vm.status.cartItem = id;
-        this.$http.post(apiUrl, {
-            data: cartData
-          })
-          .then(res => {
-            vm.status.cartItem = '';
-            $('#productModal').modal('hide');
-            vm.getCart();
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      },
       getCart() {
         const apiUrl = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
         const vm = this;
@@ -222,9 +159,9 @@
           .then(res => {
             if (!res.data.success) {
               this.$bus.$emit('message:push', res.data.message, 'danger');
-            }else{
+            } else {
               this.$bus.$emit('message:push', res.data.message, 'success');
-                vm.getCart();
+              vm.getCart();
             }
           })
           .catch(err => {
@@ -259,22 +196,8 @@
             vm.$bus.$emit('message:push', '請確認輸入的內容是否正確', 'danger');
           }
         });
-      },
-      playVideo() {
-        this.player.playVideo()
-      },
-      playing() {
-        console.log('\o/ we are watching!!!')
       }
     },
-    components: {
-      
-    },
-    computed: {
-      player() {
-        return this.$refs.youtube.player
-      }
-    }
   }
 
 </script>

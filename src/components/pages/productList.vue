@@ -27,6 +27,23 @@
   .productList {
     .theme-card-anchor {
       height: 100%;
+      display: block;
+      cursor: pointer;
+
+      img {
+        transition: transform .6s ease;
+      }
+
+      figure {
+        overflow: hidden;
+      }
+
+      &:hover {
+        img {
+          transform: scale(1.2);
+        }
+
+      }
 
       .card-themes {
         height: 100%;
@@ -58,15 +75,15 @@
       vm.catalog = vm.$route.params.catalog;
     },
     computed: {
-      catalogProduct(){
+      catalogProduct() {
         const vm = this;
-        let catalogProductData='';
-        
-        if(vm.catalog != 'all' && vm.productsData != null ){
-          catalogProductData= vm.productsData.filter(function(item,index,array){
-              return item.category == vm.catalog
+        let catalogProductData = '';
+
+        if (vm.catalog != 'all' && vm.productsData != null) {
+          catalogProductData = vm.productsData.filter(function (item, index, array) {
+            return item.category == vm.catalog
           });
-        }else{
+        } else {
           catalogProductData = vm.productsData;
         }
         return catalogProductData
